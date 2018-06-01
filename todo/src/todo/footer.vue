@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <span id="foot">
+  <div id="footer">
+    <span>
       Written by {{author}}
     </span>
   </div>
@@ -10,13 +10,19 @@
 export default {
   data () {
     return {
-      author:"Johnny"
+      author: "Johnny"
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-#foot
-  color black
+#footer{
+    margin-top: 40px
+    text-align: center
+    color: #bfbfbf
+    font-size: 10px
+    text-shadow:  0 1px 0
+  }
 </style>
+
