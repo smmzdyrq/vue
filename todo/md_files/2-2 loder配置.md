@@ -14,7 +14,7 @@ rules [
     ]
   },
   {
-    test: /\styl.css$/,
+    test: /\.styl$/,
     use:[
       "style-loader",
       "css-loader",
