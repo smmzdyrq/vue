@@ -1,17 +1,42 @@
 <template>
-  <div class="">
+  <div :class="['todo-item',todo.completed? 'completed' :  '']">
+    <!-- 绑定动态class， todo-item为样式，completed只有为false时才显示-->
+    <!-- todo事件的选项，看是否完成，决定completed的true or false -->
     <input 
     type="checkbox"
     class="toggle"
+    v-model="todo.completed"
     >
-    <button class="destroy"></button>    
+    <!-- v-model="todo.completed" -->
+    <!-- 显示todo的内容 -->
+    <label>{{todo.content}}</label>
+    <!-- 删除按钮 -->
+    <button 
+    class="destroy"
+    @click="deleteTodo"
+    ></button>    
   </div>
 
 </template>
 
 <script>
 export default {
-
+  props:{
+    todo: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    deleteTodo() {
+      this.$emit('del',this.todo.id)
+    }
+  },
+  // data () {
+  //   return {
+  //     todo: []
+  //   }
+  // }
 }
 </script>
 

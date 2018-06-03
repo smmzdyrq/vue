@@ -1,12 +1,17 @@
 <template>
   <div class="helper">
+      <!-- 未完成的todo数量 -->
     <span class="left">{{unFinishTodo}} todo left</span>
+    <!-- 三个状态的循环 -->
     <span class="tabs">
       <span
       v-for="state in states" 
       :key="state"
+      :class="[state,filter === state? 'acitved' : '']"
+      @click="toggleFilter(state)"
       > {{state}} </span>
     </span>
+    <!-- 删除全部已完成的todo -->
     <span 
     class="clear"
     @click="clearAllCompleted"
@@ -21,11 +26,30 @@ export default {
   data () {
     return {
       states: ["all","active","completed"],
-      unFinishTodo: 0
     }
   },
+  computed: {
+      unFinishTodo() {
+          return this.todos.filter(todo => !todo.completed).length
+      }
+  },
+  props: {
+      filter: {
+        type:String,
+        required:true
+      },
+      todos: {
+          type:Array,
+          required:true
+      }
+  },
   methods: {
-    clearAllCompleted() {}
+    clearAllCompleted() {
+        this.$emit("clearAllCompleted")
+    },
+    toggleFilter(state) {
+        this.$emit("toggle",state)
+    }
   }
 }
 </script>
